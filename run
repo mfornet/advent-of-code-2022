@@ -40,7 +40,9 @@ elif re.match(r"^(day)?\d{1,2}[ab]$", command):
     input_file = get(2, "input")
 
     # Build binary
-    subprocess.call(["cargo", "build", "--release", "-p", day])
+    exit_code = subprocess.call(["cargo", "build", "--release", "-p", day])
+    if exit_code != 0:
+        sys.exit(exit_code)
 
     # Run binary
     start = time.time()
