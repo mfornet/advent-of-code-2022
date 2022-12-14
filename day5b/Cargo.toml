@@ -1,0 +1,9 @@
+[package]
+name = "day5b"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+aoc = { path = "../aoc" }
+itertools.workspace = true
+regex.workspace = true
