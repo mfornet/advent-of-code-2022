@@ -1,6 +1,6 @@
 use std::{
     fs::File,
-    io::{BufReader, Read},
+    io::{BufRead, BufReader, Read},
     path::Path,
 };
 
@@ -22,4 +22,8 @@ pub fn input_str(cur_file: &str) -> String {
     let mut content = String::new();
     input(cur_file).read_to_string(&mut content).unwrap();
     content
+}
+
+pub fn input_lines(cur_file: &str) -> impl Iterator<Item = String> {
+    input(cur_file).lines().map(Result::unwrap)
 }

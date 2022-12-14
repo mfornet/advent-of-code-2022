@@ -32,7 +32,7 @@ command = get(1)
 
 if command == "init":
     day = parse_day(get(2))
-    subprocess.call(["cargo", "run", "-p", "aoc", "--", "init", day])
+    subprocess.call(["cargo", "run", "-p", "aoc-cli", "--", "init", day])
 
 elif re.match(r"^(day)?\d{1,2}[ab]$", command):
     day = parse_day(command)
@@ -46,7 +46,7 @@ elif re.match(r"^(day)?\d{1,2}[ab]$", command):
     subprocess.call([f"./target/release/{day}", input_file])
 
     end = time.time()
-    print(f"Execution time: {end - start:.3}s")
+    print(f"\nExecution time: {end - start:.3}s", file=sys.stderr)
 
 else:
     usage()

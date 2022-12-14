@@ -36,8 +36,26 @@ fn copy_dir_all(src: impl AsRef<Path>, dst: impl AsRef<Path>) -> std::io::Result
     Ok(())
 }
 
+fn download_input(year: u32, day: u32) -> String {
+    let url = format!("https://adventofcode.com/{}/day/{}/input", year, day);
+
+    let session = std::env::var("AOC_SESSION").unwrap();
+
+    let resp = reqwest::blocking::Client::new()
+        .get(&url)
+        .header("Cookie", format!("session={}", session))
+        .send()
+        .unwrap();
+
+    assert!(resp.status().is_success());
+    resp.text().unwrap()
+}
+
 fn main() {
+    dotenv::dotenv().ok();
     let args = Args::parse();
+
+    const YEAR: u32 = 2022;
 
     match args.action {
         Action::Init { name } => {
@@ -76,6 +94,12 @@ fn main() {
             let mut contents = std::fs::read_to_string(&workspace_toml).unwrap();
             contents = contents.replace("members = [", &format!("members = [\n    \"{}\",", name));
             std::fs::write(&workspace_toml, contents).unwrap();
+
+            // Download the input for the problem if it is a problem a
+            if name.ends_with('a') {
+                let input = download_input(YEAR, name[3..name.len() - 1].parse().unwrap());
+                std::fs::write(path.join("input.txt"), input).unwrap();
+            }
         }
     }
 }

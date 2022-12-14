@@ -1,11 +1,13 @@
 [workspace]
 members = [
+    "day2a",
     "day1b",
     "aoc",
     "day14a",
     "day14b",
     "day1a",
     "template",
+    "aoc-cli",
 ]
 
 [workspace.package]
@@ -18,3 +20,5 @@ clap = { version = "4.0.29", features = ["derive"] }
 itertools = "0.10.5"
 regex = "1.7.0"
 toml = "0.5.9"
+reqwest = { version = "0.11.13", features = ["blocking"] }
+dotenv = "0.15.0"
