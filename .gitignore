@@ -1,2 +1,4 @@
-/target
+.aoc_cache
 .env
+.mypy_cache
+/target
