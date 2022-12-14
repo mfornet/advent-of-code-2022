@@ -38,8 +38,12 @@ elif re.match(r"^(day)?\d{1,2}[ab]$", command):
     day = parse_day(command)
     input_file = get(2, "input")
 
+    # Build binary
+    subprocess.call(["cargo", "build", "--release", "-p", day])
+
+    # Run binary
     start = time.time()
-    subprocess.call(["cargo", "run", "-p", day, "--", input_file])
+    subprocess.call([f"./target/release/{day}", input_file])
 
     end = time.time()
     print(f"Execution time: {end - start:.3}s")
