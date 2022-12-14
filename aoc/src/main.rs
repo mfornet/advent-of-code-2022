@@ -53,20 +53,22 @@ fn main() {
             assert!(!path.exists(), "Problem already created");
 
             // If this is problem b copy everything from problem a
-            if name.ends_with('b') {
+            let src = if name.ends_with('b') {
                 let a_name = name.replace('b', "a");
                 let a_path = project_dir().join(&a_name);
                 assert!(a_path.exists(), "Problem a does not exist");
-                copy_dir_all(a_path, &path).unwrap();
+                a_name
             } else {
-                // Create the directory cloning all entries from the template
-                copy_dir_all(project_dir().join("template"), &path).unwrap();
-            }
+                String::from("template")
+            };
+
+            // Create the directory cloning all entries from the template
+            copy_dir_all(project_dir().join(&src), &path).unwrap();
 
             // Update name field in the Cargo.toml to the name of the problem
             let project_toml = path.join("Cargo.toml");
             let mut contents = std::fs::read_to_string(&project_toml).unwrap();
-            contents = contents.replace("template", &name);
+            contents = contents.replace(&src, &name);
             std::fs::write(&project_toml, contents).unwrap();
 
             // Add the problem name to the Cargo workspace members
