@@ -33,10 +33,13 @@ fn copy_dir_all(src: impl AsRef<Path>, dst: impl AsRef<Path>) -> std::io::Result
     Ok(())
 }
 
-fn download_input(year: u32, day: u32) -> String {
+fn download_input(year: u32, day: u32) -> Result<String, String> {
     let url = format!("https://adventofcode.com/{}/day/{}/input", year, day);
 
-    let session = std::env::var("AOC_SESSION").unwrap();
+    let session = std::env::var("AOC_SESSION").map_err(|_| {
+        "Session cookie not available. To download input files set AOC_SESSION env variable"
+            .to_string()
+    })?;
 
     let resp = reqwest::blocking::Client::new()
         .get(&url)
@@ -45,7 +48,7 @@ fn download_input(year: u32, day: u32) -> String {
         .unwrap();
 
     assert!(resp.status().is_success());
-    resp.text().unwrap()
+    Ok(resp.text().unwrap())
 }
 
 fn main() {
@@ -94,8 +97,10 @@ fn main() {
 
             // Download the input for the problem if it is a problem a
             if name.ends_with('a') {
-                let input = download_input(YEAR, name[3..name.len() - 1].parse().unwrap());
-                std::fs::write(path.join("input.txt"), input).unwrap();
+                match download_input(YEAR, name[3..name.len() - 1].parse().unwrap()) {
+                    Ok(input) => std::fs::write(path.join("input.txt"), input).unwrap(),
+                    Err(err) => println!("{}", err),
+                }
             }
         }
     }
