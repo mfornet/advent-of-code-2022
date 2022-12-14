@@ -14,10 +14,7 @@ enum Action {
 }
 
 fn project_dir() -> PathBuf {
-    let mut path = Path::new(file!()).to_path_buf();
-    while path.file_name().unwrap() != "aoc" {
-        path.pop();
-    }
+    let mut path = Path::new(std::env::var("CARGO_MANIFEST_DIR").unwrap().as_str()).to_path_buf();
     path.pop();
     path
 }

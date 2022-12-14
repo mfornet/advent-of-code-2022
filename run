@@ -6,7 +6,8 @@ import re
 
 
 def usage():
-    print("Usage: run [init|run] <day> [input]")
+    print("Usage: run [init] <day>")
+    print("       run <day> [test]")
     sys.exit(1)
 
 
