@@ -1,0 +1,48 @@
+#!/usr/bin/env python3
+import sys
+import subprocess
+import time
+import re
+
+
+def usage():
+    print("Usage: run [init|run] <day> [input]")
+    sys.exit(1)
+
+
+def parse_day(day):
+    if re.match(r"^\d{1,2}[ab]$", day):
+        return "day" + day
+    elif re.match(r"^day\d{1,2}[ab]$", day):
+        return day
+    else:
+        print("Invalid day format. Examples: day1a, day19b")
+        usage()
+
+
+def get(n, default=None):
+    if len(sys.argv) < n + 1:
+        if default is not None:
+            return default
+        usage()
+    return sys.argv[n]
+
+
+command = get(1)
+
+if command == "init":
+    day = parse_day(get(2))
+    subprocess.call(["cargo", "run", "-p", "aoc", "--", "init", day])
+
+elif re.match(r"^(day)?\d{1,2}[ab]$", command):
+    day = parse_day(command)
+    input_file = get(2, "input")
+
+    start = time.time()
+    subprocess.call(["cargo", "run", "-p", day, "--", input_file])
+
+    end = time.time()
+    print(f"Execution time: {end - start:.3}s")
+
+else:
+    usage()
