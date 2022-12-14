@@ -1,27 +1,14 @@
-use std::{
-    collections::HashSet,
-    fs::File,
-    io::{BufRead, BufReader},
-    path::Path,
-};
-
 use itertools::Itertools;
-
-fn input() -> BufReader<File> {
-    let day = std::env::var("CARGO_PKG_NAME").unwrap();
-    let filename = std::env::args()
-        .nth(1)
-        .unwrap_or_else(|| "input.txt".to_string());
-    let path = Path::new(&day).join(filename);
-    let file = File::open(path).expect("Could not open file");
-    BufReader::new(file)
-}
+use std::collections::HashSet;
+use std::io::BufRead;
 
 fn main() {
+    let input = aoc::input(file!());
+
     let mut rocks = HashSet::new();
     let mut lower_threshold = 0;
 
-    for line in input().lines().map(|x| x.unwrap()) {
+    for line in input.lines().map(|x| x.unwrap()) {
         line.split(" -> ")
             .map(|pos| {
                 let (x, y) = pos.split_at(pos.find(',').unwrap());

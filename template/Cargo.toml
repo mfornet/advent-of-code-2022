@@ -1,8 +1,7 @@
 [package]
-name = "day14b"
+name = "template"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-itertools.workspace = true
 aoc = { path = "../aoc" }

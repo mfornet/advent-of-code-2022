@@ -1,12 +1,13 @@
 [workspace]
 members = [
+    "aoc",
     "day14a",
     "day14b",
+    "template",
 ]
 
 [workspace.dependencies]
 itertools = "0.10.5"
-
 
 [workspace.package]
 edition = "2021"
