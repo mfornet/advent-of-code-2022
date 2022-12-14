@@ -6,10 +6,13 @@ members = [
     "template",
 ]
 
-[workspace.dependencies]
-itertools = "0.10.5"
-
 [workspace.package]
 edition = "2021"
 authors = ["Marcelo Fornet <mfornet94@gmail.com>"]
 rust-version = "1.64.0"
+
+[workspace.dependencies]
+clap = { version = "4.0.29", features = ["derive"] }
+itertools = "0.10.5"
+regex = "1.7.0"
+toml = "0.5.9"
