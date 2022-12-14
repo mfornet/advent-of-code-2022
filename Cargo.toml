@@ -1,0 +1,14 @@
+[workspace]
+members = [
+    "day14a",
+    "day14b",
+]
+
+[workspace.dependencies]
+itertools = "0.10.5"
+
+
+[workspace.package]
+edition = "2021"
+authors = ["Marcelo Fornet <mfornet94@gmail.com>"]
+rust-version = "1.64.0"
