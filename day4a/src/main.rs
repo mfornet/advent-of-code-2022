@@ -3,9 +3,9 @@ use itertools::Itertools;
 fn main() {
     let sol = aoc::input_lines(file!())
         .map(|pair| {
-            let mut it = pair.split(",").map(|s| {
+            let mut it = pair.split(',').map(|s| {
                 if let [a, b] = s
-                    .split("-")
+                    .split('-')
                     .map(|s| s.parse::<u32>().unwrap())
                     .collect_vec()[..]
                 {

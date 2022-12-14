@@ -63,7 +63,7 @@ fn main() {
             regex::Regex::new(r"^day\d{1,2}[ab]$")
                 .unwrap()
                 .is_match(&name)
-                .then(|| ())
+                .then_some(())
                 .unwrap_or_else(|| panic!("Invalid problem name"));
 
             // Check problem was not already created

@@ -1,3 +1,3 @@
 fn main() {
-    let input = aoc::input(file!());
+    let _input = aoc::input(file!());
 }

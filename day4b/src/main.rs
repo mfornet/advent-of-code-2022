@@ -3,9 +3,9 @@ use itertools::Itertools;
 fn main() {
     let sol = aoc::input_lines(file!())
         .map(|pair| {
-            let mut it = pair.split(",").map(|s| {
+            let mut it = pair.split(',').map(|s| {
                 if let [a, b] = s
-                    .split("-")
+                    .split('-')
                     .map(|s| s.parse::<u32>().unwrap())
                     .collect_vec()[..]
                 {
@@ -17,7 +17,7 @@ fn main() {
             let a = it.next().unwrap();
             let b = it.next().unwrap();
 
-            (a.1 >= b.0 && a.0 <= b.1 || b.1 >= a.0 && b.0 <= a.1) as u32
+            (a.1 >= b.0 && a.0 <= b.1) as u32
         })
         .sum::<u32>();
 
