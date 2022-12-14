@@ -3,6 +3,7 @@ members = [
     "aoc",
     "day14a",
     "day14b",
+    "day1a",
     "template",
 ]
 

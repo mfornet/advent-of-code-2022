@@ -18,6 +18,7 @@ fn project_dir() -> PathBuf {
     while path.file_name().unwrap() != "aoc" {
         path.pop();
     }
+    path.pop();
     path
 }
 
@@ -51,8 +52,16 @@ fn main() {
             let path = project_dir().join(&name);
             assert!(!path.exists(), "Problem already created");
 
-            // Create the directory cloning all entries from the template
-            copy_dir_all(project_dir().join("template"), &path).unwrap();
+            // If this is problem b copy everything from problem a
+            if name.ends_with('b') {
+                let a_name = name.replace('b', "a");
+                let a_path = project_dir().join(&a_name);
+                assert!(a_path.exists(), "Problem a does not exist");
+                copy_dir_all(a_path, &path).unwrap();
+            } else {
+                // Create the directory cloning all entries from the template
+                copy_dir_all(project_dir().join("template"), &path).unwrap();
+            }
 
             // Update name field in the Cargo.toml to the name of the problem
             let project_toml = path.join("Cargo.toml");

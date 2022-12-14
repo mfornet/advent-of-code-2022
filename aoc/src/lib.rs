@@ -1,4 +1,8 @@
-use std::{fs::File, io::BufReader, path::Path};
+use std::{
+    fs::File,
+    io::{BufReader, Read},
+    path::Path,
+};
 
 pub fn input(cur_file: &str) -> BufReader<File> {
     let input_path = std::env::args()
@@ -12,4 +16,10 @@ pub fn input(cur_file: &str) -> BufReader<File> {
     path.set_extension("txt");
     let file = File::open(path).expect("Could not open file");
     BufReader::new(file)
+}
+
+pub fn input_str(cur_file: &str) -> String {
+    let mut content = String::new();
+    input(cur_file).read_to_string(&mut content).unwrap();
+    content
 }
