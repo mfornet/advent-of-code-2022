@@ -1,5 +1,7 @@
 [workspace]
 members = [
+    "day19b",
+    "day19a",
     "day17b",
     "day18b",
     "day18a",
@@ -38,3 +40,5 @@ toml = "0.5.9"
 reqwest = { version = "0.11.13", features = ["blocking"] }
 dotenv = "0.15.0"
 html-escape = "0.2.12"
+rayon = "1.6.1"
+rand = "0.8.5"
