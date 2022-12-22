@@ -101,8 +101,8 @@ fn main() {
 
     let mut answer = 0;
 
-    for i in 0..turtle {
-        answer += tops[i];
+    for i in tops.iter().take(turtle) {
+        answer += *i;
     }
 
     let cycle_len = hare - turtle;

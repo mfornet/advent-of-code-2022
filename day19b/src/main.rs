@@ -237,7 +237,7 @@ fn main() {
     let answer = data
         .par_iter()
         .map(|(_, line)| {
-            let caps = pat.as_ref().unwrap().captures(&line).unwrap();
+            let caps = pat.as_ref().unwrap().captures(line).unwrap();
             let ore_ore = caps[1].parse::<u64>().unwrap();
             let clay_ore = caps[2].parse::<u64>().unwrap();
             let obsidian_ore = caps[3].parse::<u64>().unwrap();

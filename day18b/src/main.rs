@@ -11,7 +11,7 @@ fn main() {
 
     for line in aoc::input_lines(file!()) {
         let tokens = line
-            .split(",")
+            .split(',')
             .map(|s| s.parse::<i32>().unwrap())
             .collect::<Vec<_>>();
 

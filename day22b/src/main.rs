@@ -52,8 +52,8 @@ impl<'a> Iterator for Actions<'a> {
     }
 }
 
-const DX: &'static [i32; 4] = &[0, 1, 0, -1];
-const DY: &'static [i32; 4] = &[1, 0, -1, 0];
+const DX: &[i32; 4] = &[0, 1, 0, -1];
+const DY: &[i32; 4] = &[1, 0, -1, 0];
 
 #[derive(Debug)]
 struct Cube {

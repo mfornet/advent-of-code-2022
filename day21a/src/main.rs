@@ -58,7 +58,7 @@ fn main() {
         if let Ok(num) = expr.parse::<i64>() {
             monkeys.insert(name.to_string(), Monkey::Value(num));
         } else {
-            let mut tokens = expr.split(" ");
+            let mut tokens = expr.split(' ');
 
             let left = tokens.next().unwrap();
             let op = tokens.next().unwrap();

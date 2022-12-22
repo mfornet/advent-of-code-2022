@@ -124,7 +124,7 @@ fn go(rem: u64, state: State, blueprint: &Blueprint) -> u64 {
 
         // Do nothing
         if can_build_geode < 2 && can_build_obsidian < 2 {
-            let mut n_state = state.clone();
+            let mut n_state = state;
             n_state.update();
             let cur = go(rem - 1, n_state, blueprint);
             best = std::cmp::max(best, cur);
@@ -144,7 +144,7 @@ fn main() {
     let answer: u64 = data
         .par_iter()
         .map(|(ix, line)| {
-            let caps = pat.as_ref().unwrap().captures(&line).unwrap();
+            let caps = pat.as_ref().unwrap().captures(line).unwrap();
             let ore_ore = caps[1].parse::<u64>().unwrap();
             let clay_ore = caps[2].parse::<u64>().unwrap();
             let obsidian_ore = caps[3].parse::<u64>().unwrap();

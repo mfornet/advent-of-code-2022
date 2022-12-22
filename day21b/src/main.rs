@@ -51,9 +51,8 @@ fn compute(id: String, monkeys: &mut HashMap<String, Monkey>) -> symbolic::Monke
     let ret = match binary.op {
         Op::Mul => left * right,
         Op::Sum => left + right,
-        Op::Sub => left - right,
+        Op::Sub | Op::Eq => left - right,
         Op::Div => left / right,
-        Op::Eq => left - right,
     };
 
     monkeys.insert(id, Monkey::Value(ret));
@@ -228,7 +227,7 @@ fn main() {
             };
             monkeys.insert(name.to_string(), Monkey::Value(num));
         } else {
-            let mut tokens = expr.split(" ");
+            let mut tokens = expr.split(' ');
 
             let left = tokens.next().unwrap();
             let op = tokens.next().unwrap();
