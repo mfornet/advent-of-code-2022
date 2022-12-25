@@ -366,6 +366,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "day25a"
+version = "0.1.0"
+dependencies = [
+ "aoc",
+ "itertools",
+]
+
+[[package]]
 name = "day2a"
 version = "0.1.0"
 dependencies = [
